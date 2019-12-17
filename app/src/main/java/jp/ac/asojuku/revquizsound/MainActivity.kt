@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity() {
     //SoundPool型のインスタンス変数のフィールドプロパティを宣言
     private lateinit var soundPool: SoundPool;
 
+    //効果音のリソースID
+    private var answer = 0;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,6 +24,10 @@ class MainActivity : AppCompatActivity() {
             //ボタンがクリックされた時の処理
             val intent = Intent(this,QuestActivity::class.java)
             this.startActivity(intent)
+        }
+
+        this.answerButton.setOnClickListener{
+            soundPool.play(answer,1.0f,1.0f,0,0,1.0f);
         }
     }
 
@@ -37,11 +44,17 @@ class MainActivity : AppCompatActivity() {
         }else{
             //新バージョン以降のsoundPool設定
             val audioAttributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ALARM).build()
+                .setUsage(AudioAttributes.USAGE_ALARM).build();
             //オーディオ設定を使ってsoundPoolのインスタンスを作成
             SoundPool.Builder().setMaxStreams(2)                //同時音源数
                 .setAudioAttributes(audioAttributes).build()    //オーディオの種類
         }
         this.answer = soundPool.load(this,R.raw.answer,1)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //soundPoolリソースの解放
+        this.soundPool.release()
     }
 }

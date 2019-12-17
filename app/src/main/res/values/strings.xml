@@ -3,4 +3,10 @@
     <string name="answer_text">解答くん</string>
     <string name="syu_button_text">出題くん</string>
     <string name="answer_button_text">答える</string>
+    <string name="correct_button_text">正解！</string>
+    <string name="uncorrect_button_text">不正解</string>
+    <string name="clap_button_text">拍手</string>
+    <string name="jan_button_text">ジャン！</string>
+    <string name="back_button_text">解答くん</string>
+    <string name="syu_text">出題くん</string>
 </resources>
